@@ -4,10 +4,15 @@ Documentation       this suite will handle valid credential
 Resource        ../Resource/CommonFunctionality_resource.robot
 Test Setup      launch browser
 Test Teardown       Close Browser
+Test Template       valid credential template
 *** Test Cases ***
-valid credential test
+TC1     Admin       admin123        My Info
+TC2     Admin       admin123        Welcome
 
-    Input Text    id=txtUsername    Admin
-    Input Password    id=txtPassword    admin123
-    Click Element    id=btnlogin
-    Page Should Contain    My Info
+*** Keywords ***
+valid credential template
+    [Arguments]     ${username}     ${password}     ${login}
+    Input Text    id=txtUsername    ${username}
+    Input Password    id=txtPassword    ${password}
+    Click Element    id=btnLogin
+    Page Should Contain    ${login}
